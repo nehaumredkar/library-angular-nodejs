@@ -1,0 +1,33 @@
+<div class="container mt-5">
+    <div class="row ">
+        <div class="col-sm-12 text-center">
+            <h2>List Of Books</h2>
+        </div>
+        <div class="col-sm-12">
+            <a class="btn btn-info  float-right " routerLink="../book-issue-list">Last 30 days record</a>
+        </div>
+        <div class="col-sm-12">
+            <table class="table table-striped mt-2">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Book Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="book-list">
+                    <tr *ngFor="let bookList of getBookList; let i=index">
+                        <td> {{i+1}} </td>
+                        <td> {{bookList.name}} </td>
+                        <td> <span *ngIf="bookList.status == 'return'; then issueBook else returnBook"></span>
+                            <ng-template #issueBook><button (click)="bookEvent(bookList.id, 'issue')"
+                                    class="btn btn-sm btn-success"> Issue </button></ng-template>
+                            <ng-template #returnBook><button (click)="bookEvent(bookList.id, 'return')"
+                                    class="btn btn-sm btn-primary"> Return </button></ng-template>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
